@@ -3,6 +3,8 @@ const cors = require('cors'); //Cross-origin resourse sharing middleware
 const bodyParser = require('body-parser'); // Handle HTTP POST request
 const morgan = require('morgan'); // Logger for Node.js
 
+const messages = require('./db/messages');
+
 const app = express();
 
 app.use(morgan('tiny'));
@@ -13,6 +15,12 @@ app.get('/', (req, res) => {
    res.json({
        message: 'Hello world!'
    });
+});
+
+app.get('/messages', (req, res) => {
+    messages.getAll().then((messages) => {
+        res.json(messages);
+    })
 });
 
 /*
