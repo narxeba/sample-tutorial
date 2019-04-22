@@ -23,6 +23,16 @@ app.get('/messages', (req, res) => {
     })
 });
 
+app.post('/messages', (req, res) => {
+   console.log(req.body);
+   messages.create(req.body).then((message) => {
+       res.json(message);
+   }).catch((error) => {
+       res.status(500);
+       res.json(error);
+   })
+});
+
 /*
 The process object is a global that provides information about, and control over, the current Node.js process.
 As a global, it is always available to Node.js applications without using require().

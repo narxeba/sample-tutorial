@@ -11,10 +11,10 @@ const schema = Joi.object().keys({
         ]}
     )}
 );
-const message = db.get('messages');
+const messages = db.get('messages');
 
 function getAll() {
-    return message.find();
+    return messages.find();
 }
 
 function create(message) {
@@ -23,7 +23,7 @@ function create(message) {
     const result = Joi.validate(message, schema);
     if (result.error == null) {
         message.created = new Date();
-        return message.insert(message);
+        return messages.insert(message);
     } else {
         return Promise.reject(result.error);
     }
